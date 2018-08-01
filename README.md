@@ -52,7 +52,7 @@ Write out the AJAX call that will grab the data and `console.log` the list of ea
 
 #### Part 2. Add the title data to the page
 
-**Add each *title* to the page**: Loop over your JSON response object, and each `title` to the page using jQuery. Aim to put each title inside the `<div id="info">` section of the page. For example:
+**Add each *title* to the page**: Loop over your JSON response object, and each `title` to the page. Aim to put each title inside the `<div id="info">` section of the page. For example:
 
 ```html
 <div id="info">
