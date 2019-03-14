@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import EarthQuakeComp from './EarthQuakeList'
+import MapComp from './MapComp'
 class App extends Component {
     state = {
-      earthQuakes : '',
+      earthQuakes : { features:[] },
       data : false
     }
 
@@ -11,9 +12,9 @@ class App extends Component {
            .then((response) => {
               return response.json();
             })
-          .then((myJson) => {
-              console.log(JSON.stringify(myJson))
-              return myJson
+          .then((newData) => {
+              console.log(JSON.stringify(newData))
+              return newData
             }).then(newData => {
                 this.setState({
                   earthQuakes : newData ,
@@ -21,22 +22,23 @@ class App extends Component {
                 })
             })
         }
-
+        
+      componentDidMount(){
+         this.dataFetch()
+      }
   render() {
-    if(this.state.data !== true){
-      this.dataFetch()
-    }
+ 
 
-    let dataList = this.state.earthQuakes
-    console.log(dataList.features)
+    let dataList = this.state.earthQuakes.features
+    console.log(dataList)
     return (
       <div className="app">
         <div className="mapContainer">
-          ...put Map Component here...
+          <MapComp earthQuakes={dataList} />
         </div>
         <div className="quakeContainer">
           <h1>Earthquakes from the past week: </h1>
-            <EarthQuakeComp dataList={this.dataList} />
+            <EarthQuakeComp dataList={dataList} />
         </div>
       </div>
     );
